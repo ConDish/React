@@ -1,2 +1,0 @@
-# React
-Working with react
