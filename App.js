@@ -14,6 +14,20 @@ import Toast, { DURATION } from 'react-native-easy-toast';
 
 
 export default class App extends React.Component {
+
+  // Cargando las fuentes que me pide native-base
+  async componentWillMount() {
+
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+      'sewer': require('./assets/sewer.ttf'),
+      'nozstudio': require('./assets/NOZSTUDIO.ttf')
+    });
+
+
+  }
+
   render() {
     return <MyNavigator />;
   }
@@ -60,7 +74,7 @@ class Primera extends React.Component {
     Arraydata.push(data);
 
     // Validar el usuario y la contraseña
-    if (Arraydata[0].nombre == "admin" && Arraydata[0].contra == md5('123456')) {
+    if (Arraydata[0].nombre == "" && Arraydata[0].contra == md5('')) {
 
       navigate('ir', { nombre: Arraydata[0].nombre });
 
@@ -70,7 +84,7 @@ class Primera extends React.Component {
       this.changeContra('');
 
       // Mostrar el toast por datos incorrectos
-      this.refs.toast.show(<Text style={{ textAlign: "center", color: "#FFF"}}>Datos Incorrectos!</Text>);
+      this.refs.toast.show(<Text style={{ textAlign: "center", color: "#FFF" }}>Datos Incorrectos!</Text>);
     }
 
   }
@@ -104,9 +118,9 @@ class Primera extends React.Component {
           underlayColor='#fff'>
           <Text style={styles.textboton}>Enviar</Text>
         </TouchableOpacity>
-        
-          <Toast ref="toast" style={styles.toast}/>
-        
+
+        <Toast ref="toast" style={styles.toast} />
+
       </View>
     );
   }
@@ -164,7 +178,7 @@ const styles = StyleSheet.create({
   toast: {
     backgroundColor: '#FFC300',
     width: '100%',
-    
+
   },
 
 });
