@@ -4,7 +4,9 @@ import {
     Image,
     View,
     FlatList,
-    TextInput
+    TextInput,
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation';
 import { Container, Header, Title, Left, Right, Button, Body, Content, Text, Card, CardItem } from 'native-base';
@@ -31,6 +33,18 @@ export default class Productos extends React.Component {
         }
 
     }
+
+    onDetalles(nombre, tipo, precio) {
+        Alert.alert(
+            nombre,
+            'Tipo del producto: ' + tipo + '\n' + 'Valor: ' + precio,
+            [
+                 {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            { cancelable: false }
+        )
+    }
+
     renderItem = ({ item }) => {
 
 
@@ -47,9 +61,13 @@ export default class Productos extends React.Component {
             return (
 
                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 3 }}>
+                    <TouchableOpacity
+                    onPress={() => this.onDetalles(item.nombre, item.tipo_producto, item.precio)}
+                    >
                     <Image source={{ uri: item.imagen }}
                         style={{ width: 80, height: 80, margin: 5 }}
                     />
+                    </TouchableOpacity>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 18, color: 'green', marginBottom: 15 }}>
                             {item.nombre}
@@ -76,13 +94,15 @@ export default class Productos extends React.Component {
             producto: this.state.producto
         }
 
-        const url = 'http://192.168.1.59/react_service/?op=1&producto=' + producto.producto;
+        const url = 'https://samioff15.000webhostapp.com/?op=1&producto=' + producto.producto;
 
         fetch(url).then((response) => response.json())
             .then((responseJson) => {
+
                 this.setState({
                     dataSource: responseJson
                 })
+                
             })
             .catch((error) => {
                 console.log(error)
@@ -95,7 +115,7 @@ export default class Productos extends React.Component {
     // Es el primer llamado de los productos
     componentDidMount() {
 
-        const url = 'http://192.168.1.59/react_service/';
+        const url = 'https://samioff15.000webhostapp.com/';
 
         fetch(url).then((response) => response.json())
             .then((responseJson) => {

@@ -15,17 +15,28 @@ import Toast, { DURATION } from 'react-native-easy-toast';
 
 export default class App extends React.Component {
 
-  // Cargando las fuentes que me pide native-base
+  // Cargando las fuentes que me pide native-base o descargas
   async componentWillMount() {
 
     await Expo.Font.loadAsync({
+
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
       'sewer': require('./assets/sewer.ttf'),
       'nozstudio': require('./assets/NOZSTUDIO.ttf')
+
     });
 
 
+
+    async function alertIfRemoteNotificationsDisabledAsync() {
+      
+      const { Permissions } = Expo;
+      const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+      if (status !== 'granted') {
+        alert('Hey! You might want to enable notifications for my app, they are good.');
+      }
+    }
   }
 
   render() {
