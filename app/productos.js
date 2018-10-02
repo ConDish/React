@@ -39,7 +39,7 @@ export default class Productos extends React.Component {
             nombre,
             'Tipo del producto: ' + tipo + '\n' + 'Valor: ' + precio,
             [
-                 {text: 'OK', onPress: () => console.log('OK Pressed')},
+                 {text: 'OK'},
             ],
             { cancelable: false }
         )

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Esto es un hilo en JavaScript:</p>
+<p id="demo"></p>
+
+<button onclick="myStopFunction()">Parar tiempo</button>
+<button onclick="myStarFunction()">Iniciar tiempo</button>
+
+<script>
+var myVar = setInterval(myTimer, 1000);
+
+function myTimer() {
+    var d = new Date();
+    var t = d.toLocaleTimeString();
+    document.getElementById("demo").innerHTML = t;
+}
+
+function myStopFunction() {
+    clearInterval(myVar);
+}
+
+function myStarFunction(){
+    myVar = setInterval(myTimer, 1000);
+
+    // Enviar datos a react native
+    postMessage(1 + 1, '*');
+}
+
+
+</script>
+
+</body>
+</html>

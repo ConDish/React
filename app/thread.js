@@ -2,13 +2,24 @@ import React from 'react';
 import {
     View,
     Text,
+    Image,
     WebView
 } from 'react-native';
+import WebViewBridge from 'react-native-webview-bridge';
 
 
 
 
 export default class Thread extends React.Component {
+    static navigationOptions = {
+
+        title: 'Hilo',
+        tabBarIcon: ({ tintColor }) => (
+            <Image source={require('./img/hilo.png')} />
+        ),
+
+
+    };
     constructor() {
         super()
         this.state = {
@@ -18,20 +29,8 @@ export default class Thread extends React.Component {
     }
 
 
-    prueba(){
-        setTimeout(() => {
-            this.state.numero++;
-        }, 3000)
-    }
+    componentDidMount(){
 
-    componentWillUnmount(){
-
-        // while(this.state.numero < 5){
-        //     this.prueba();
-        //     console.log(this.state.numero);
-        // }
-
-        console.log('holi');
 
     }
 
@@ -39,11 +38,17 @@ export default class Thread extends React.Component {
 
     render() {
         return (
-            <WebView
-                originWhitelist={['*']}
-                source={{ html: '<h1>Hello world</h1>' }}
-                onMessage={this.handleMessage}
-            />
+           <View style={{ flex: 1}}>
+                <WebView
+                    automaticallyAdjustContentInsets={false}
+                    javaScriptEnabled={true}
+                    // Recibir datos del html
+                    onMessage={(event) => console.log('onMessage:', event.nativeEvent.data)}
+                    source={require('./thread.html')}
+                />
+            </View>
+
+            
         )
     }
 } 
