@@ -9,7 +9,8 @@ import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navig
 import { Container, Header, Title, Left, Right, Button, Body, Content, Text, Card, CardItem } from 'native-base';
 import Productos from './productos.js';
 import Contactame from './contactame.js';
-import Thread from './thread.js'
+import Thread from './thread.js';
+import Grafica from './grafica.js';
 
 // Cuando la persona se logea
 class Logeado extends React.Component {
@@ -69,7 +70,9 @@ export default createMaterialTopTabNavigator(
     Home: { screen: Logeado },
     Productos: { screen: Productos },
     Contactame: { screen: Contactame },
-    Thread: { screen: Thread }
+    Thread: { screen: Thread },
+    Grafica: { screen: Grafica }
+
   },
   {
     // Agregar estilos o iconos a mi tabnavigator
